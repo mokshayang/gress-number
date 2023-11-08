@@ -166,3 +166,18 @@ a {
     color: brown;
     font-weight: bold;
 }
+input[type=button]{
+    display: block;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin:4rem auto 1rem;
+    outline:none;  
+}
+#result{
+
+    font-size: 2rem;
+    height: 3rem;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}

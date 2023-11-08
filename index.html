@@ -9,11 +9,12 @@
         ,integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" ,crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <link rel="stylesheet" href="./css/style.css">
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <style>
-   
+
 </style>
 
 <body>
@@ -31,15 +32,17 @@
         </div>
         <div class=" gameTitle" style="text-align:center ;">Guess Number</div>
         <div class="row ">
-            <div class="col-6"  id="userInputNumberPanel">
+            <div class="col-6" id="userInputNumberPanel">
                 <div class="row">
-                    <div  class=" numberInputPan    d-flex ">
+                    <div class=" numberInputPan    d-flex ">
                         <input type="text" id="num0" size="1" maxlength="1">
                         <input type="text" id="num1" size="1" maxlength="1">
                         <input type="text" id="num2" size="1" maxlength="1">
                         <input type="text" id="num3" size="1" maxlength="1">
                     </div>
                 </div>
+                <input type="button" value="解答" id="sol">
+                <div id="result"></div>
                 <div id="congratsUserPanel" class="row congratsPanel">
                     恭喜！答對了！
                     <div id="answerDiv"></div>
@@ -50,7 +53,7 @@
             </div>
 
             <div class="col-6" id="computerGuessingPanel">
-                <div  class="row ">
+                <div class="row ">
                     <div class="col-5 row d-flex align-items-center" style="font-size: 0.5rem;">
                         <span id="cpNum0" class="col-3 abStyle"></span>
                         <span id="cpNum1" class="col-3 abStyle"></span>
@@ -88,12 +91,12 @@
         </div>
 
 
-      
+
 
     </div>
     <div class="container">
         <div id="rulePanel" class="col-12">
-            <div > Rules: </div>
+            <div> Rules: </div>
             <div class="row">
                 <div class="col-8 floatRight">
                     <span>"A"</span> indicates both the number AND the postion are CORRECT.

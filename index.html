@@ -1,15 +1,282 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Guess number</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" ,integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" ,crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Guess number</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        ,integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" ,crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Roboto Slab', serif;
+    }
+
+
+
+    .row {
+        clear: both;
+    }
+
+    .row:after {
+        content: "";
+        clear: both;
+        display: block;
+    }
+
+    .container {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto
+    }
+
+    @media (min-width:768px) {
+        .container {
+            width: 750px
+        }
+    }
+
+    @media (min-width:992px) {
+        .container {
+            width: 970px
+        }
+    }
+
+    @media (min-width:1200px) {
+        .container {
+            width: 1170px
+        }
+    }
+
+    a {
+        text-decoration: none;
+        color: orange;
+    }
+
+    .gameTitle {
+        width: inherit;
+        background-color: #1a0d00;
+        font-size: 25px;
+        text-align: center;
+        color: #ffffff;
+        padding: 15px;
+    }
+
+    .numberInputPan {
+        width: inherit;
+        text-align: center;
+    }
+
+    .numberInputPan input {
+        border: 5px solid #1a0d00;
+        -webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1), 0 0 16px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1), 0 0 16px rgba(0, 0, 0, 0.1);
+        box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1), 0 0 16px rgba(0, 0, 0, 0.1);
+        padding: 5px;
+        margin: 5px;
+        text-align: center;
+        font-size: 2rem;
+        color: blue;
+        height: 5.4rem;
+    }
+
+    .congratsPanel {
+        display: none;
+        text-align: center;
+        font-size: 35px;
+        font-weight: bold;
+        color: #cc3300;
+        line-height: 45px;
+    }
+
+    .playAgain {
+        padding: 5px;
+        font-size: 25px;
+        border: 1px solid orange;
+    }
+
+    #guessingList {
+        padding: 5px;
+        text-align: center;
+        font-size: 30px;
+        color: maroon;
+    }
+
+    #guessingList .col-4 {
+        border-bottom: 1px solid #BF8153;
+    }
+
+    #guessTable td {
+        width: 33.33%;
+        text-align: center;
+        font-size: 20px;
+        color: maroon;
+        padding: 5px;
+    }
+
+    #rulePanel {
+        display: none;
+        position: absolute;
+        top: 0px;
+        width: inherit;
+        background-color: rgba(255, 242, 229, 0.9);
+        color: #005500;
+        line-height: 30px;
+    }
+
+    #rulePanel .row:first-child,
+    #rulePanel .row:last-child {
+        text-align: center;
+    }
+
+    .floatRight {
+        float: right;
+    }
+
+    #rulePanel span {
+        color: orange;
+    }
+
+    #rulePanel .row:last-child {
+        color: orange;
+        border-top: 1px dotted orange;
+        border-bottom: 1px dotted orange;
+    }
+
+    #computerGuessingPanel {
+        display: none;
+    }
+
+    .computerGuessingOutput input {
+        width: 3rem;
+        border: 5px solid #1a0d00;
+        -webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1), 0 0 16px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1), 0 0 16px rgba(0, 0, 0, 0.1);
+        box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1), 0 0 16px rgba(0, 0, 0, 0.1);
+        padding: 5px;
+        margin: 5px;
+        text-align: center;
+        font-size: 2rem;
+        color: brown;
+    }
+
+    .abStyle {
+        padding: 2px;
+        /* margin: 5px; */
+        text-align: center;
+        font-size: 2rem;
+        color: brown;
+        font-weight: bold;
+    }
+</style>
+
 <body>
-<h1>Hello, world!</h1>
+    <div class="container">
+        <div class="row">
+            <div id="changeToComputerGuess" class="col-4">
+                <a href="#" onclick="computerGuessMode();">COMPUTER GUESS MODE</a>
+            </div>
+            <div id="changeToUserGuess" class="col-6">
+                <a href="#" onclick="userGuessMode();">USER GUESS MODE</a>
+            </div>
+            <div class="col-6 floatRight" style="text-align: right;">
+                <a href="#" onclick="showRulePan();">RULE</a>
+            </div>
+        </div>
+        <div class="row gameTitle">Guess Number</div>
+
+        <div class="row ">
+            <div class="col-6"  id="userInputNumberPanel">
+                <div class="row">
+                    <div  class=" numberInputPan    d-flex ">
+                        <input type="text" id="num0" size="1" maxlength="1">
+                        <input type="text" id="num1" size="1" maxlength="1">
+                        <input type="text" id="num2" size="1" maxlength="1">
+                        <input type="text" id="num3" size="1" maxlength="1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6" id="computerGuessingPanel">
+                <div  class="row ">
+                    <div class="col-5 row" style="font-size: 0.5rem;">
+                        <span id="cpNum0" class="col-3 abStyle"></span>
+                        <span id="cpNum1" class="col-3 abStyle"></span>
+                        <span id="cpNum2" class="col-3 abStyle"></span>
+                        <span id="cpNum3" class="col-3 abStyle"></span>
+                    </div>
+                    <div class="col-7 computerGuessingOutput ">
+                        <input type="text" id="inputCountA" size="1" onkeyup="inputCountFocus();">
+                        <span class="abStyle">A</span>
+                        <input type="text" id="inputCountB" size="1" onkeyup="computerGuessNumber();">
+                        <span class="abStyle">B</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div id="guessingList" class="row">
+                    <div id="userTitle" class="col-4">User</div>
+                    <div id="" class="col-4"></div>
+                    <div id="cpTitle" class="col-4 floatRight">Computer</div>
+                </div>
+                <div class="row">
+                    <table id="guessTable" width="100%">
+                    </table>
+                </div>
+            </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" ,integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" ,crossorigin="anonymous"></script>
+        </div>
+
+
+        <div id="congratsUserPanel" class="row congratsPanel">
+            恭喜！答對了！
+            <div id="answerDiv"></div>
+            <div class="floatRight">
+                <a class="playAgain" href="#" onclick="userGuesspPlayAgain();">Play Again!</a>
+            </div>
+        </div>
+        <div id="computerRightPanel" class="row congratsPanel">
+            電腦猜對了！
+            <div class="floatRight">
+                <a class="playAgain" href="#" onclick="computerGuessPlayAgain();">Play Again!</a>
+            </div>
+        </div>
+
+    </div>
+    <div class="container">
+        <div id="rulePanel" class="col-12">
+            <div class="row"> Rules: </div>
+            <div class="row">
+                <div class="col-8 floatRight">
+                    <span>"A"</span> indicates both the number AND the postion are CORRECT.
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <span>"B"</span> indicates the correct number BUT in the WRONG spot.
+                </div>
+            </div>
+            <div class="row">
+                <a href="#" onclick="hideRulePan();">BACK</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        ,integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        ,crossorigin="anonymous"></script>
+    <script src="./js/js.js"></script>
 </body>
+
 </html>

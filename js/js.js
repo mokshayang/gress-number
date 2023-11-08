@@ -235,7 +235,7 @@ function computerGuessNumber() {
       var cell2 = row.insertCell(1);
       var cell3 = row.insertCell(2);
       cell1.innerHTML = computerNum.toString();
-      cell2.innerHTML = " <----- 第 " + guessCount + " 次猜測結果 ----->";
+      cell2.innerHTML = " 第 " + guessCount + " 次猜測 ";
       cell3.innerHTML = countA + "A" + countB + "B";
 
       if (countA == 4) {

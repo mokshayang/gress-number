@@ -151,11 +151,15 @@ function userGuesspPlayAgain() {
     computerNum = [];
     computerNum[0] = Math.floor((Math.random() * 10) % 9) + 1;
     computerNumber();
-
     hideCngrtsUserPan();
     hideChangeToUserBtn();
     showChangeToComputerBtn();
     guessNumber();
+
+    const element = document.querySelectorAll('.bi');
+    element.forEach(function (e, index) {
+        e.className = `bi bi-${index + 1}-square-fill`; // 将类名还原为初始状态
+    });
 }
 
 function userGuessMode() {
@@ -176,11 +180,11 @@ function computerGuessMode() {
     showComputerGuessingPan();
 
     computerGuessPlayAgain();
-    
+
 }
 
 function computerGuessPlayAgain() {
-    
+
     cleanUserRespond();
     cleanResultTable();
 
@@ -195,7 +199,6 @@ function computerGuessPlayAgain() {
     hideChangeToComputerBtn();
     computerNumber();
     displayComputerGuess();
-    
 }
 
 function cleanUserRespond() {
